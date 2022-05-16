@@ -19,45 +19,56 @@ import Foundation
 typealias Street = ([String:String])
 typealias Address = (city: String, state: String, streetN: [String:String], country: String, postalCode: Int, houseType: String?, buildingName: String, apartmentFloor: Int?)
 
+// Direcciones constantes
 let streetOne: Street = ["streetName":"Avenida", "number":"3", "numberOne":"4", "numberTwo":"76"]
-let addressOne: Address = ("Cucuta", "Norte de Santander", streetOne, "Colombia", 345, "Apartamento", "Julioert", 2)
+let addressOne: Address = ("Cucuta", "Norte de Santander", streetOne, "Colombia", 3452, "Apartamento", "Continental", 2)
 
-let streetTwo: Street = ["streetName":"Calle", "number":"3", "numberOne":"4", "numberTwo":"5"]
-let addressTwo: Address = ("Cucuta", "Norte de Santander", streetTwo, "Colombia", 345, "Casa", "popie", nil)
+let streetTwo: Street = ["streetName":"Transversal", "number":"70", "numberOne":"83", "numberTwo":"21"]
+let addressTwo: Address = ("Medellin", "Antioquia", streetTwo, "Colombia", 4365, "Casa", "Casa Familiar", nil)
 
-let streetThree: Street = ["streetName":"Avenida", "number":"3", "numberOne":"4", "numberTwo":"5"]
-let addressThree: Address = ("Cucuta", "Norte de Santander", streetThree, "Colombia", 345, "Apartamento", "diered", 23)
+let streetThree: Street = ["streetName":"Calle", "number":"98", "numberOne":"12", "numberTwo":"33"]
+let addressThree: Address = ("Bogota", "Cundinamarca", streetThree, "Colombia", 9896, "Apartamento", "Holiday Inn", 23)
 
-
+// Funcion de impresion de una Direccion
 func printAddress(addressIn: Address){
-    if addressIn.houseType != nil && addressIn.apartmentFloor != nil {
+    if addressIn.houseType != nil || addressIn.apartmentFloor != nil {
         switch addressIn.houseType {
         case "Casa":
-            print("La direccion ingresada es \(addressIn.streetN["streetName"]!) \(addressIn.streetN["number"]!) # \(addressIn.streetN["numberOne"]!)-\(addressIn.streetN["numberTwo"]!)  ubicada en \(addressIn.city),\(addressIn.state),\(addressIn.country) ")
+            print("La direccion ingresada es \(addressIn.streetN["streetName"]!) \(addressIn.streetN["number"]!) # \(addressIn.streetN["numberOne"]!)-\(addressIn.streetN["numberTwo"]!), Casa; ubicada en \(addressIn.city), \(addressIn.state), \(addressIn.country) ")
         case "Apartamento":
             print("La direccion ingresada es \(addressIn.streetN["streetName"]!) \(addressIn.streetN["number"]!) # \(addressIn.streetN["numberOne"]!)-\(addressIn.streetN["numberTwo"]!), Edificio \(addressIn.buildingName) piso # \(addressIn.apartmentFloor!); ubicado en \(addressIn.city), \(addressIn.state), \(addressIn.country)")
         default:
-            print("jajajaja")
+            print("No es un tipo de inmueble esperado")
         }
     }else{
-        print("Algun valor entre Tipo de casa y piso del apartamento")
+        print("Algun valor entre Tipo de casa y Piso del apartamento es nulo, asegurate de revisar")
     }
         
 }
 
-printAddress(addressIn: addressOne)
+printAddress(addressIn: addressTwo)
           
 
-
-func returnApartmentFloorAndBuildingName(setString: [Address]) -> String{
+// Funcion de impresion parametros apartamento y piso de una Direccion
+func returnApartmentFloorAndBuildingName(setString: [Address]) -> [String]{
     var stringReturn: [String] = []
     if setString[0].houseType != nil && setString[0].apartmentFloor != nil{
-        stringReturn.append(contentsOf: setString[0].houseType!)
-        stringReturn.append(contentsOf: setString[0].apartmentFloor!)
+        stringReturn.append(setString[0].houseType!)
+        stringReturn.append(String(setString[0].apartmentFloor!))
+    }
+    if setString[1].houseType != nil && setString[1].apartmentFloor != nil{
+        stringReturn.append(setString[1].houseType!)
+        stringReturn.append(String(setString[1].apartmentFloor!))
+    }
+    if setString[2].houseType != nil && setString[2].apartmentFloor != nil{
+        stringReturn.append(setString[2].houseType!)
+        stringReturn.append(String(setString[2].apartmentFloor!))
     }
     return stringReturn
-}
     
+}
+ 
+// Creacion de string para enviar a la funcion
 var stringAddress: [Address] = []
 stringAddress.insert(addressOne, at: 0)
 stringAddress.insert(addressTwo, at: 1)
